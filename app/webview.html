@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>123-笨虎导航</title>
+    <meta charset="utf-8" />
+    <!-- <link rel="stylesheet" href="http://123.benhu.com/css/index.css" /> -->
+    <style>
+        html{
+            height: 100%;
+        }
+        body{
+            height: 100%;
+            margin: 0;
+        }
+        #webview{
+            height: 100%;
+        }
+    </style>
+    
+    <script>
+        const ipcRenderer = require('electron').ipcRenderer;
+        onload = function() {
+           var webview = document.getElementById("webview");
+           webview.addEventListener('new-window', function(e) {
+                var protocol = require('url').parse(e.url).protocol;
+                if (protocol === 'http:' || protocol === 'https:') {
+                    require('electron').shell.openExternal(e.url);
+                }
+            });
+            
+            ipcRenderer.on('url', function(message) {
+                console.log(message);  
+            });
+        }
+       
+        
+    </script>
+  </head>
+  
+  <body>
+    <webview id="webview" allowpopups="on" height="900"  plugins></webview>
+  </body>
+</html>
