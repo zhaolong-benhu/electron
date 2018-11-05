@@ -1,6 +1,7 @@
 # electron
 
 #安装及运行
+
 1.clone代码
 
 2.npm install npm如果不行用cnpm安装
